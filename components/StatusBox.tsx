@@ -7,8 +7,8 @@ import { formatNumber } from '@/utils/formatNumber';
 const StatusBox = ({ bgcolor, amount, subamount, label }: StatusBoxProps): JSX.Element => {
   const theme = useTheme();
   return (
-    <Box bgcolor={bgcolor} color={theme.palette.getContrastText(bgcolor)} textAlign="center" clone>
-      <Card>
+    <Card>
+      <Box bgcolor={bgcolor} color={theme.palette.getContrastText(bgcolor)} textAlign="center">
         <CardContent>
           <Typography variant="h3">
             <Box display="inline-flex" alignItems="center">
@@ -31,8 +31,8 @@ const StatusBox = ({ bgcolor, amount, subamount, label }: StatusBoxProps): JSX.E
             </Box>
           </Typography>
         </CardContent>
-      </Card>
-    </Box>
+      </Box>
+    </Card>
   );
 };
 
