@@ -1,0 +1,181 @@
+export interface Data {
+  NewConfirmed: number;
+  NewRecovered: number;
+  NewHospitalized: number;
+  NewDeaths: number;
+  Confirmed: number;
+  Recovered: number;
+  Hospitalized: number;
+  Deaths: number;
+}
+
+export interface Today extends Data {
+  UpdateDate: string;
+  Source: string;
+  DevBy: string;
+  SeverBy: string;
+}
+
+export interface TimelineData extends Data {
+  Date: string;
+}
+
+export interface Timeline {
+  UpdateDate: string;
+  Source: string;
+  DevBy: string;
+  ServerBy: string;
+  Data: TimelineData[];
+}
+
+export interface CasesSum {
+  Province: {
+    'Samut Sakhon': number;
+    Bangkok: number;
+    Chonburi: number;
+    'Samut Prakan': number;
+    Rayong: number;
+    Nonthaburi: number;
+    Phuket: number;
+    Chanthaburi: number;
+    Songkhla: number;
+    Yala: number;
+    'Pathum Thani': number;
+    'Nakhon Pathom': number;
+    Pattani: number;
+    Tak: number;
+    'Ang Thong': number;
+    'Chiang Rai': number;
+    'Chiang Mai': number;
+    Narathiwat: number;
+    Chachoengsao: number;
+    'Phra Nakhon Si Ayutthaya': number;
+    Trat: number;
+    Phetchaburi: number;
+    Ratchaburi: number;
+    'Surat Thani': number;
+    'Nakhon Ratchasima': number;
+    Krabi: number;
+    Lopburi: number;
+    'Samut Songkhram': number;
+    Chumphon: number;
+    Satun: number;
+    'Prachuap Khiri Khan': number;
+    'Ubon Ratchathani': number;
+    Prachinburi: number;
+    Saraburi: number;
+    'Sing Buri': number;
+    Unknown: number;
+    'Nakhon Si Thammarat': number;
+    Buriram: number;
+    Phatthalung: number;
+    Kanchanaburi: number;
+    'Suphan Buri': number;
+    Surin: number;
+    'Sa Kaeo': number;
+    'Nakhon Sawan': number;
+    'Khon Kaen': number;
+    Loei: number;
+    'Udon Thani': number;
+    Chaiyaphum: number;
+    Phichit: number;
+    Trang: number;
+    Sisaket: number;
+    Chainat: number;
+    Phitsanulok: number;
+    Lampang: number;
+    Lamphun: number;
+    Uttaradit: number;
+    'Nong Khai': number;
+    'Mae Hong Son': number;
+    'Nakhon Nayok': number;
+    Phetchabun: number;
+    Mukdahan: number;
+    Sukhothai: number;
+    'Amnat Charoen': number;
+    Phayao: number;
+    'Roi Et': number;
+    'Nong Bua Lamphu': number;
+    Kalasin: number;
+    'Maha Sarakham': number;
+    'Kamphaeng Phet': number;
+    'Nakhon Phanom': number;
+    'Phang Nga': number;
+    Yasothon: number;
+    Phrae: number;
+    Ranong: number;
+    'Uthai Thani': number;
+    Nan: number;
+    'Sakon Nakhon': number;
+  };
+  Nation: {
+    Thailand: number;
+    Burmese: number;
+    Unknown: number;
+    Cambodia: number;
+    India: number;
+    UnitedStatesofAmerica: number;
+    UnitedKingdom: number;
+    Japan: number;
+    France: number;
+    China: number;
+    Russia: number;
+    Laos: number;
+    Swiss: number;
+    Germany: number;
+    ต่างด้าว: number;
+    Pakistan: number;
+    Kuwait: number;
+    Italy: number;
+    Canada: number;
+    Sweden: number;
+    Netherlands: number;
+    Vietnam: number;
+    Philippines: number;
+    Ethiopia: number;
+    Bangladesh: number;
+    Belgium: number;
+    Brazil: number;
+    'Korea,South': number;
+    Sudan: number;
+    Denmark: number;
+    Indonesia: number;
+    Australia: number;
+    Singapore: number;
+    Hungary: number;
+    Malaysia: number;
+    Egypt: number;
+    Albania: number;
+    Qatar: number;
+    Spain: number;
+    Kazakhstani: number;
+    Iran: number;
+    Taiwan: number;
+    Israel: number;
+    Finland: number;
+    Uzbekistan: number;
+    American: number;
+    Serbia: number;
+    Ukraine: number;
+    Yemen: number;
+    Mexico: number;
+    Portugal: number;
+    NewZealand: number;
+    'India-Thailand': number;
+    Palestine: number;
+    Liberia: number;
+    British: number;
+    Mali: number;
+    Tunisia: number;
+  };
+  Gender: {
+    Female: number;
+    Male: number;
+    Unknown: number;
+  };
+  LastData: string;
+  UpdateDate: string;
+  Source: string;
+  DevBy: string;
+  SeverBy: string;
+}

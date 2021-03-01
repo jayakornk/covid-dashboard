@@ -1,61 +1,49 @@
-import Head from 'next/head';
+import { Box, Container, Typography } from '@material-ui/core';
+import { NextPage } from 'next';
+import dynamic from 'next/dynamic';
 
-import styles from '../styles/Home.module.css';
+import { getTimeline, getToday } from '@/adapters/covid19';
+import CoronavirusIcon from '@/components/icons/CoronavirusIcon';
+import TimelineChart from '@/components/TimelineChart';
+import TodayDashboard from '@/components/TodayDashboard';
+import { Timeline, Today } from '@/models/covid19.interface';
 
-const Home = (): JSX.Element => {
+interface Props {
+  today: Today;
+  timeline: Timeline;
+}
+
+const TimelineChartWithNoSSR = dynamic(() => import('@/components/TimelineChart'), { ssr: false });
+
+const Home: NextPage<Props> = (props): JSX.Element => {
+  const { today, timeline } = props;
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a href="https://github.com/vercel/next.js/tree/master/examples" className={styles.card}>
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>Instantly deploy your Next.js site to a public URL with Vercel.</p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+    <Box my={6} clone>
+      <Container>
+        <Typography variant="h2" component="h1" gutterBottom>
+          <Box fontWeight="fontWeightMedium" component="span" display="flex" alignItems="center">
+            <span>Covid Dashboard</span>{' '}
+            <Box ml={2} clone>
+              <CoronavirusIcon fontSize="inherit" />
+            </Box>
+          </Box>
+        </Typography>
+        <TodayDashboard today={today} />
+        {/* <TimelineChartWithNoSSR today={today} timeline={timeline} /> */}
+        <TimelineChart today={today} timeline={timeline} />
+      </Container>
+    </Box>
   );
+};
+
+Home.getInitialProps = async () => {
+  const today = await getToday();
+  const timeline = await getTimeline();
+
+  return {
+    today,
+    timeline,
+  };
 };
 
 export default Home;
