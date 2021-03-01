@@ -1,6 +1,5 @@
 import { Box, Container, Typography } from '@material-ui/core';
 import { NextPage } from 'next';
-import dynamic from 'next/dynamic';
 
 import { getTimeline, getToday } from '@/adapters/covid19';
 import CoronavirusIcon from '@/components/icons/CoronavirusIcon';
@@ -12,8 +11,6 @@ interface Props {
   today: Today;
   timeline: Timeline;
 }
-
-const TimelineChartWithNoSSR = dynamic(() => import('@/components/TimelineChart'), { ssr: false });
 
 const Home: NextPage<Props> = (props): JSX.Element => {
   const { today, timeline } = props;
@@ -29,7 +26,6 @@ const Home: NextPage<Props> = (props): JSX.Element => {
           </Box>
         </Typography>
         <TodayDashboard today={today} />
-        {/* <TimelineChartWithNoSSR today={today} timeline={timeline} /> */}
         <TimelineChart today={today} timeline={timeline} />
       </Container>
     </Box>
