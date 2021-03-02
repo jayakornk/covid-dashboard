@@ -8,15 +8,38 @@ const StatusBox = ({ bgcolor, amount, subamount, label }: StatusBoxProps): JSX.E
   const theme = useTheme();
   return (
     <Card>
-      <Box bgcolor={bgcolor} color={theme.palette.getContrastText(bgcolor)} textAlign="center">
+      <Box
+        sx={{
+          bgcolor: bgcolor,
+          color: theme.palette.getContrastText(bgcolor),
+          textAlign: 'center',
+        }}
+      >
         <CardContent>
           <Typography variant="h3">
-            <Box display="inline-flex" alignItems="center">
-              <Box fontWeight="fontWeightMedium" component="span">
+            <Box
+              sx={{
+                display: 'inline-flex',
+                alignItems: 'center',
+              }}
+            >
+              <Box
+                component="span"
+                sx={{
+                  fontWeight: 'fontWeightMedium',
+                }}
+              >
                 {formatNumber(amount)}
               </Box>
               {subamount ? (
-                <Box fontWeight="fontWeightMedium" fontSize="h5.fontSize" component="span" ml={1}>
+                <Box
+                  component="span"
+                  sx={{
+                    fontWeight: 'fontWeightMedium',
+                    fontSize: 'h5.fontSize',
+                    ml: 1,
+                  }}
+                >
                   ({subamount > 0 ? '+' : ''}
                   {formatNumber(subamount)})
                 </Box>
@@ -26,7 +49,12 @@ const StatusBox = ({ bgcolor, amount, subamount, label }: StatusBoxProps): JSX.E
             </Box>
           </Typography>
           <Typography variant="h5" component="h2">
-            <Box fontWeight="fontWeightMedium" component="span">
+            <Box
+              component="span"
+              sx={{
+                fontWeight: 'fontWeightMedium',
+              }}
+            >
               {label}
             </Box>
           </Typography>

@@ -48,7 +48,12 @@ const TodayDashboard = ({ today }: { today: Today }): JSX.Element => {
           />
         </Grid>
       </Grid>
-      <Box textAlign="right" mt={1}>
+      <Box
+        sx={{
+          textAlign: 'right',
+          mt: 1,
+        }}
+      >
         <Typography>Last update: {lastUpdate}</Typography>
       </Box>
     </div>

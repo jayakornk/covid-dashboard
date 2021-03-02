@@ -1,7 +1,8 @@
 import { blue, grey, red, yellow } from '@material-ui/core/colors';
 
 export function hexToRgbA(hex: string, opacity = 1): string {
-  let c;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let c: any;
   if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
     c = hex.substring(1).split('');
     if (c.length == 3) {

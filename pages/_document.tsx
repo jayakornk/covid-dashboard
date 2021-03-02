@@ -1,6 +1,11 @@
+// import createEmotionServer from '@emotion/server/create-instance';
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
+
+// import { cache } from './_app';
+
+// const { extractCritical } = createEmotionServer(cache);
 
 export default class MyDocument extends Document {
   render(): JSX.Element {
@@ -17,7 +22,7 @@ export default class MyDocument extends Document {
 }
 
 // `getInitialProps` belongs to `_document` (instead of `_app`),
-// it's compatible with server-side generation (SSG).
+// it's compatible with static-site generation (SSG).
 MyDocument.getInitialProps = async (ctx) => {
   // Resolution order
   //
@@ -51,10 +56,22 @@ MyDocument.getInitialProps = async (ctx) => {
     });
 
   const initialProps = await Document.getInitialProps(ctx);
+  // const styles = extractCritical(initialProps.html);
 
   return {
     ...initialProps,
     // Styles fragment is rendered after the app and page rendering finish.
-    styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement()],
+    styles: [
+      ...React.Children.toArray(initialProps.styles),
+      sheets.getStyleElement(),
+      // ctx.req && (
+      //   <style
+      //     key="emotion-style-tag"
+      //     data-emotion={`css-server ${styles.ids.join(' ')}`}
+      //     // eslint-disable-next-line react/no-danger
+      //     dangerouslySetInnerHTML={{ __html: styles.css }}
+      //   />
+      // ),
+    ],
   };
 };

@@ -1,20 +1,16 @@
 import 'chartjs-adapter-luxon';
 
 import { Box, Card, CardContent, Grid, useTheme } from '@material-ui/core';
+import { ChartOptions } from 'chart.js';
 import { DateTime } from 'luxon';
 import { useMemo } from 'react';
 import { Bar, defaults, Doughnut, Line } from 'react-chartjs-2';
 
-import { Timeline, Today } from '@/models/covid19.interface';
+import { TimelineChartProps } from '@/models/timelineChart.interface';
 import { formatNumber } from '@/utils/formatNumber';
 import { hexToRgbA, STATUS_COLOR } from '@/utils/statusColor';
 
-interface Props {
-  timeline: Timeline;
-  today: Today;
-}
-
-const TimelineChart = ({ today, timeline }: Props): JSX.Element => {
+const TimelineChart = ({ today, timeline }: TimelineChartProps): JSX.Element => {
   const theme = useTheme();
 
   const dataTimeFormat = 'MM/dd/yyyy';
@@ -90,7 +86,7 @@ const TimelineChart = ({ today, timeline }: Props): JSX.Element => {
     [timeline]
   );
 
-  const options = {
+  const options: ChartOptions = {
     title: {
       display: true,
       text: ['Timeline Summary', `(${startDate} - ${endDate})`],
@@ -100,9 +96,17 @@ const TimelineChart = ({ today, timeline }: Props): JSX.Element => {
       mode: 'index',
       callbacks: {
         label: (tooltipItem, data) => {
-          let label = `${data.datasets[tooltipItem.datasetIndex].label}:` || '';
-          label = `${label} ${formatNumber(tooltipItem.yLabel)}`;
-          return label;
+          if (
+            data.datasets &&
+            tooltipItem.datasetIndex !== undefined &&
+            tooltipItem.yLabel !== undefined
+          ) {
+            let label = `${data.datasets[tooltipItem.datasetIndex].label}:` || '';
+            label = `${label} ${formatNumber(tooltipItem.yLabel)}`;
+            return label;
+          }
+
+          return 'null';
         },
       },
     },
@@ -154,7 +158,7 @@ const TimelineChart = ({ today, timeline }: Props): JSX.Element => {
     [today]
   );
 
-  const doughnutOptions = {
+  const doughnutOptions: ChartOptions = {
     title: {
       display: true,
       text: ['Total Cases', `(${todayDate})`],
@@ -162,11 +166,23 @@ const TimelineChart = ({ today, timeline }: Props): JSX.Element => {
     tooltips: {
       callbacks: {
         label: (tooltipItem, data) => {
-          const value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-          const percentage = ((value / today.Confirmed) * 100).toFixed(2);
-          let label = `${data.labels[tooltipItem.datasetIndex]}:` || '';
-          label = `${label} ${formatNumber(value)} (${percentage}%)`;
-          return label;
+          if (
+            data.datasets &&
+            data.labels &&
+            tooltipItem.datasetIndex !== undefined &&
+            data.datasets[tooltipItem.datasetIndex] !== undefined &&
+            data.datasets[tooltipItem.datasetIndex].data !== undefined &&
+            tooltipItem.index !== undefined
+          ) {
+            const tooltipDatasetIndex = tooltipItem.datasetIndex;
+            const datasetIndexed = data.datasets[tooltipDatasetIndex];
+            const value = (datasetIndexed.data as number[])[tooltipItem.index];
+            const percentage = ((value / today.Confirmed) * 100).toFixed(2);
+            let label = `${data.labels[tooltipDatasetIndex]}:` || '';
+            label = `${label} ${formatNumber(value)} (${percentage}%)`;
+            return label;
+          }
+          return 'null';
         },
       },
     },
@@ -209,7 +225,7 @@ const TimelineChart = ({ today, timeline }: Props): JSX.Element => {
     dataTimeFormat
   ).toFormat('DDD');
 
-  const barOptions = {
+  const barOptions: ChartOptions = {
     title: {
       display: true,
       text: ['Confirmed - Recovered', `(${barStartDate} - ${barEndDate})`],
@@ -220,9 +236,16 @@ const TimelineChart = ({ today, timeline }: Props): JSX.Element => {
       itemSort: () => -1,
       callbacks: {
         label: (tooltipItem, data) => {
-          let label = `${data.datasets[tooltipItem.datasetIndex].label}:` || '';
-          label = `${label} ${formatNumber(tooltipItem.yLabel)}`;
-          return label;
+          if (
+            data.datasets &&
+            tooltipItem.datasetIndex !== undefined &&
+            tooltipItem.yLabel !== undefined
+          ) {
+            let label = `${data.datasets[tooltipItem.datasetIndex].label}:` || '';
+            label = `${label} ${formatNumber(tooltipItem.yLabel)}`;
+            return label;
+          }
+          return 'null';
         },
       },
     },
@@ -258,7 +281,11 @@ const TimelineChart = ({ today, timeline }: Props): JSX.Element => {
     },
   };
   return (
-    <Box mt={4}>
+    <Box
+      sx={{
+        mt: 4,
+      }}
+    >
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Card>
