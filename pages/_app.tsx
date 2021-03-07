@@ -26,6 +26,11 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     <CacheProvider value={cache}>
       <Head>
         <title>JayakornK - Covid Dashboard</title>
+        <meta
+          name="description"
+          key="description"
+          content="Simple dashboard to display stats of the coronavirus in Thailand."
+        />
         <meta name="theme-color" content={memoizedTheme.palette.primary.main} />
         <meta name="color-scheme" content="dark light" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />

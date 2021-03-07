@@ -17,7 +17,7 @@ export const theme = (): Theme => {
             mode: prefersDarkMode ? 'dark' : 'light',
           },
           typography: {
-            fontFamily: '"Athiti", "Roboto", "Helvetica", "Arial", sans-serif',
+            fontFamily: '"Bai Jamjuree", "Roboto", "Helvetica", "Arial", sans-serif',
             fontSize: 16,
           },
         })

@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import { DateTime } from 'luxon';
 
 import { Today } from '@/models/covid19.interface';
@@ -48,14 +48,32 @@ const TodayDashboard = ({ today }: { today: Today }): JSX.Element => {
           />
         </Grid>
       </Grid>
-      <Box
-        sx={{
-          textAlign: 'right',
-          mt: 1,
+      <Grid
+        container
+        spacing={2}
+        mt={1}
+        flexDirection={{
+          sm: 'row-reverse',
         }}
       >
-        <Typography>Last update: {lastUpdate}</Typography>
-      </Box>
+        <Grid item xs={12} sm order={2}>
+          <Typography>
+            Source:{' '}
+            <a href="https://covid19.th-stat.com/th/api" target="_blank" rel="noopener noreferrer">
+              https://covid19.th-stat.com
+            </a>
+          </Typography>
+        </Grid>
+        <Grid item xs={12} sm order={1}>
+          <Typography
+            textAlign={{
+              sm: 'right',
+            }}
+          >
+            Last update: {lastUpdate}
+          </Typography>
+        </Grid>
+      </Grid>
     </div>
   );
 };
