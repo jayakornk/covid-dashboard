@@ -16,48 +16,50 @@ const StatusBox = ({ bgcolor, amount, subamount, label }: StatusBoxProps): JSX.E
         }}
       >
         <CardContent>
-          <Typography variant="h3">
-            <Box
-              sx={{
-                display: 'inline-flex',
-                alignItems: 'center',
-              }}
-            >
+          <Box display="flex" flexDirection="column-reverse">
+            <Typography variant="h5" component="h2">
               <Box
                 component="span"
                 sx={{
                   fontWeight: 'fontWeightMedium',
                 }}
               >
-                {formatNumber(amount)}
+                {label}
               </Box>
-              {subamount ? (
+            </Typography>
+            <Typography variant="h3">
+              <Box
+                sx={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                }}
+              >
                 <Box
                   component="span"
                   sx={{
                     fontWeight: 'fontWeightMedium',
-                    fontSize: 'h5.fontSize',
-                    ml: 1,
                   }}
                 >
-                  ({subamount > 0 ? '+' : ''}
-                  {formatNumber(subamount)})
+                  {formatNumber(amount)}
                 </Box>
-              ) : (
-                ''
-              )}
-            </Box>
-          </Typography>
-          <Typography variant="h5" component="h2">
-            <Box
-              component="span"
-              sx={{
-                fontWeight: 'fontWeightMedium',
-              }}
-            >
-              {label}
-            </Box>
-          </Typography>
+                {subamount ? (
+                  <Box
+                    component="span"
+                    sx={{
+                      fontWeight: 'fontWeightMedium',
+                      fontSize: 'h5.fontSize',
+                      ml: 1,
+                    }}
+                  >
+                    ({subamount > 0 ? '+' : ''}
+                    {formatNumber(subamount)})
+                  </Box>
+                ) : (
+                  ''
+                )}
+              </Box>
+            </Typography>
+          </Box>
         </CardContent>
       </Box>
     </Card>
