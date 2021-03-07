@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Link, Typography } from '@material-ui/core';
 import { DateTime } from 'luxon';
 
 import { Today } from '@/models/covid19.interface';
@@ -59,9 +59,14 @@ const TodayDashboard = ({ today }: { today: Today }): JSX.Element => {
         <Grid item xs={12} sm order={2}>
           <Typography>
             Source:{' '}
-            <a href="https://covid19.th-stat.com/th/api" target="_blank" rel="noopener noreferrer">
+            <Link
+              color="inherit"
+              href="https://covid19.th-stat.com/th/api"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               https://covid19.th-stat.com
-            </a>
+            </Link>
           </Typography>
         </Grid>
         <Grid item xs={12} sm order={1}>

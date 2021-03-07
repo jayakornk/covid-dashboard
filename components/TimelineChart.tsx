@@ -294,14 +294,14 @@ const TimelineChart = ({ today, timeline }: TimelineChartProps): JSX.Element => 
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs sm={6}>
+        <Grid item xs={12} md={6}>
           <Card>
             <CardContent>
               <Doughnut data={dataDoughnut} options={doughnutOptions} />
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs sm={6}>
+        <Grid item xs={12} md={6}>
           <Card>
             <CardContent>
               <Bar data={dataBar} options={barOptions} />
