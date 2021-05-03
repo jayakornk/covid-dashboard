@@ -8,6 +8,10 @@ import { IChartProps, TimelineChartProps } from '@/models/timelineChart.interfac
 import { formatNumber } from '@/utils/formatNumber';
 import { STATUS_COLOR } from '@/utils/statusColor';
 
+export const fixDate = (date: string): number => {
+  return DateTime.fromFormat(date, 'MM/dd/yyyy').plus({ day: 1 }).toMillis();
+};
+
 const TimelineChart = (props: TimelineChartProps): JSX.Element => {
   const { today, timeline } = props;
   const theme = useTheme();
@@ -26,10 +30,6 @@ const TimelineChart = (props: TimelineChartProps): JSX.Element => {
   const setChartHeight = (percent: number) => {
     const calHeight = height * percent;
     return calHeight <= 300 ? 300 : calHeight;
-  };
-
-  const fixDate = (date: string) => {
-    return DateTime.fromFormat(date, dataTimeFormat).plus({ day: 1 }).toMillis();
   };
 
   const avgGrowthRate = (arr: number[]) => {

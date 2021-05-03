@@ -1,3 +1,4 @@
+import { TimelineData } from './covid19.interface';
 import { WithChildren } from './withChildren.interface';
 
 export type StatusBoxProps = WithChildren<{
@@ -5,4 +6,6 @@ export type StatusBoxProps = WithChildren<{
   amount: number;
   subamount?: number;
   label: string;
+  last7days: TimelineData[];
+  selector: string;
 }>;

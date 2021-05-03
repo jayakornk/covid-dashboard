@@ -31,7 +31,7 @@ const Home: NextPage<Props> = (props): JSX.Element => {
               </Box>
             </Box>
           </Typography>
-          <TodayDashboard today={today} />
+          <TodayDashboard today={today} timeline={timeline} />
           <TimelineChart today={today} timeline={timeline} />
         </Container>
       </Box>
