@@ -14,6 +14,9 @@ module.exports = withBundleAnalyzer(
     },
     reactStrictMode: true,
     poweredByHeader: false,
+    future: {
+      webpack5: true,
+    },
     async headers() {
       return [
         {

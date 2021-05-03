@@ -52,6 +52,7 @@ const TimelineChart = (props: TimelineChartProps): JSX.Element => {
             autoScaleYaxis: true,
           },
           fontFamily: theme.typography.fontFamily,
+          background: 'transparent',
           toolbar: {
             autoSelected: 'zoom',
             export: {
@@ -243,6 +244,7 @@ const TimelineChart = (props: TimelineChartProps): JSX.Element => {
             enabled: false,
           },
           fontFamily: theme.typography.fontFamily,
+          background: 'transparent',
           toolbar: {
             tools: {
               selection: false,
@@ -559,6 +561,7 @@ const TimelineChart = (props: TimelineChartProps): JSX.Element => {
         chart: {
           type: 'pie',
           fontFamily: theme.typography.fontFamily,
+          background: 'transparent',
         },
         title: {
           text: 'Total Cases',
@@ -633,6 +636,7 @@ const TimelineChart = (props: TimelineChartProps): JSX.Element => {
         chart: {
           type: 'bar',
           fontFamily: theme.typography.fontFamily,
+          background: 'transparent',
           stacked: true,
           toolbar: {
             tools: {
@@ -762,7 +766,7 @@ const TimelineChart = (props: TimelineChartProps): JSX.Element => {
     >
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Card>
+          <Card raised>
             <CardContent>
               <Chart
                 type="area"
@@ -774,7 +778,7 @@ const TimelineChart = (props: TimelineChartProps): JSX.Element => {
           </Card>
         </Grid>
         <Grid item xs={12}>
-          <Card>
+          <Card raised>
             <CardContent>
               <Chart
                 type="line"
@@ -787,6 +791,7 @@ const TimelineChart = (props: TimelineChartProps): JSX.Element => {
         </Grid>
         <Grid item xs={12} md={6}>
           <Card
+            raised
             sx={{
               height: '100%',
             }}
@@ -807,6 +812,7 @@ const TimelineChart = (props: TimelineChartProps): JSX.Element => {
         </Grid>
         <Grid item xs={12} md={6}>
           <Card
+            raised
             sx={{
               height: '100%',
             }}

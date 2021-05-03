@@ -55,6 +55,12 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
         <link href="/manifest.json" rel="manifest" />
         <link rel="icon" href="/favicon.ico" />
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;500;700&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       <ThemeProvider theme={memoizedTheme}>
         <CssBaseline />
