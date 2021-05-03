@@ -4,7 +4,6 @@ import React from 'react';
 
 import { StatusBoxProps } from '@/models/statusbox.interface';
 import { formatNumber } from '@/utils/formatNumber';
-import { hexToRgbA } from '@/utils/statusColor';
 
 const StatusBoxChart = dynamic(() => import('./StatusBoxChart'), {
   ssr: false,
@@ -29,7 +28,7 @@ const StatusBox = ({
     >
       <Box
         sx={{
-          bgcolor: hexToRgbA(bgcolor),
+          bgcolor: bgcolor,
           color: theme.palette.getContrastText(bgcolor),
           textAlign: 'center',
           height: '100%',

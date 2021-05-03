@@ -29,7 +29,7 @@ const TodayDashboard = ({ today, timeline }: TodayDashboardProps): JSX.Element =
             subamount={today.NewDeaths}
             label="Deaths"
             last7days={last7days}
-            selector="Deaths"
+            selector="NewDeaths"
           />
         </Grid>
         <Grid item xs>
@@ -48,7 +48,7 @@ const TodayDashboard = ({ today, timeline }: TodayDashboardProps): JSX.Element =
             subamount={today.NewHospitalized}
             label="Hospitalized"
             last7days={last7days}
-            selector="Hospitalized"
+            selector="NewHospitalized"
           />
         </Grid>
         <Grid item xs={6}>
