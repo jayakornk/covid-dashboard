@@ -7,12 +7,20 @@ import { formatNumber } from '@/utils/formatNumber';
 const StatusBox = ({ bgcolor, amount, subamount, label }: StatusBoxProps): JSX.Element => {
   const theme = useTheme();
   return (
-    <Card>
+    <Card
+      sx={{
+        height: '100%',
+      }}
+    >
       <Box
         sx={{
           bgcolor: bgcolor,
           color: theme.palette.getContrastText(bgcolor),
           textAlign: 'center',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
         <CardContent>

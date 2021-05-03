@@ -1,12 +1,16 @@
 import { Box, Container, Typography } from '@material-ui/core';
 import { NextPage } from 'next';
+import dynamic from 'next/dynamic';
 
 import { getTimeline, getToday } from '@/adapters/covid19';
 import Footer from '@/components/Footer';
 import CoronavirusIcon from '@/components/icons/CoronavirusIcon';
-import TimelineChart from '@/components/TimelineChart';
 import TodayDashboard from '@/components/TodayDashboard';
 import { Timeline, Today } from '@/models/covid19.interface';
+
+const TimelineChart = dynamic(() => import('@/components/TimelineChart'), {
+  ssr: false,
+});
 
 interface Props {
   today: Today;

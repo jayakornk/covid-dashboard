@@ -33,14 +33,14 @@ const TodayDashboard = ({ today }: { today: Today }): JSX.Element => {
             label="Hospitalized"
           />
         </Grid>
-        <Grid item xs sm={6}>
+        <Grid item xs={6}>
           <StatusBox
             bgcolor={STATUS_COLOR.NEW_CONFIRMED}
             amount={today.NewConfirmed}
             label="New Case"
           />
         </Grid>
-        <Grid item xs sm={6}>
+        <Grid item xs={6} sm>
           <StatusBox
             bgcolor={STATUS_COLOR.NEW_RECOVERED}
             amount={today.NewRecovered}
