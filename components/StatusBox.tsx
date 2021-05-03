@@ -89,7 +89,14 @@ const StatusBox = ({
             </Box>
           </CardContent>
         </Box>
-        <Box sx={{ width: '100%', position: 'absolute', bottom: 0 }}>
+        <Box
+          sx={{
+            width: '100%',
+            position: 'absolute',
+            bottom: 0,
+            color: theme.palette.text.primary,
+          }}
+        >
           <StatusBoxChart
             bgcolor={bgcolor}
             label={label}
