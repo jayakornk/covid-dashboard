@@ -125,7 +125,7 @@ const TimelineChart = (props: TimelineChartProps): JSX.Element => {
           enabled: false,
         },
         stroke: {
-          curve: 'smooth',
+          curve: 'straight',
           width: 3,
         },
         legend: {
