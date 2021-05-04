@@ -1,4 +1,12 @@
-import { Box, Card, CardContent, Grid, useTheme } from '@material-ui/core';
+import {
+  Box,
+  Card,
+  CardContent,
+  createStyles,
+  Grid,
+  makeStyles,
+  useTheme,
+} from '@material-ui/core';
 import useWindowDimensions from 'hooks/useWindowDimensions';
 import { DateTime } from 'luxon';
 import { useMemo } from 'react';
@@ -8,14 +16,32 @@ import { IChartProps, TimelineChartProps } from '@/models/timelineChart.interfac
 import { formatNumber } from '@/utils/formatNumber';
 import { STATUS_COLOR } from '@/utils/statusColor';
 
+import ChartInfoIcon from './ChartInfoIcon';
+
 export const fixDate = (date: string): number => {
   return DateTime.fromFormat(date, 'MM/dd/yyyy').plus({ day: 1 }).toMillis();
 };
 
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    graphWrapper: {
+      position: 'relative',
+    },
+    formulaBlock: {
+      backgroundColor: theme.palette.background.default,
+      borderRadius: theme.shape.borderRadius,
+      color: theme.palette.text.primary,
+      marginTop: '0.4rem',
+      padding: '0.3rem 0.5rem',
+    },
+  })
+);
+
 const TimelineChart = (props: TimelineChartProps): JSX.Element => {
   const { today, timeline } = props;
-  const theme = useTheme();
   const { height } = useWindowDimensions();
+  const theme = useTheme();
+  const classes = useStyles();
 
   const dataTimeFormat = 'MM/dd/yyyy';
   const startDate = DateTime.fromFormat(timeline.Data[0].Date, dataTimeFormat).toFormat('DDD');
@@ -231,7 +257,7 @@ const TimelineChart = (props: TimelineChartProps): JSX.Element => {
         },
       ],
     }),
-    [timeline]
+    [timeline, theme]
   );
 
   const dailyNewStatus = useMemo<IChartProps>(
@@ -552,7 +578,7 @@ const TimelineChart = (props: TimelineChartProps): JSX.Element => {
         },
       ],
     }),
-    [timeline]
+    [timeline, theme]
   );
 
   const totalCasesChart = useMemo<IChartProps>(
@@ -622,7 +648,7 @@ const TimelineChart = (props: TimelineChartProps): JSX.Element => {
       },
       series: [today.Hospitalized, today.Recovered, today.Deaths],
     }),
-    [today]
+    [today, theme]
   );
 
   const barStartDate = DateTime.fromFormat(last14Days[0].Date, dataTimeFormat).toFormat('DDD');
@@ -755,7 +781,7 @@ const TimelineChart = (props: TimelineChartProps): JSX.Element => {
         },
       ],
     }),
-    [timeline]
+    [timeline, theme]
   );
 
   return (
@@ -780,12 +806,36 @@ const TimelineChart = (props: TimelineChartProps): JSX.Element => {
         <Grid item xs={12}>
           <Card raised>
             <CardContent>
-              <Chart
-                type="line"
-                series={dailyNewStatus.series}
-                options={dailyNewStatus.options}
-                height={setChartHeight(0.6)}
-              />
+              <Box className={classes.graphWrapper}>
+                <ChartInfoIcon
+                  maxWidth={450}
+                  title={
+                    <>
+                      This chart shows the number of each status updates daily for the past 14 days.
+                      It also includes the{' '}
+                      <strong style={{ textDecoration: 'underline' }}>average growth rate</strong>{' '}
+                      of each status over this period. <br />
+                      <div className={classes.formulaBlock}>
+                        <code>
+                          (Growth rate = Absolute change / Average value)
+                          <br />
+                          Absolute change = day14 - day1
+                          <br />
+                          Average value = (day1 + day2 + ... + day14) / 14
+                          <br />
+                          Growth rate = (Absolute change / Average value) * 100
+                        </code>
+                      </div>
+                    </>
+                  }
+                />
+                <Chart
+                  type="line"
+                  series={dailyNewStatus.series}
+                  options={dailyNewStatus.options}
+                  height={setChartHeight(0.6)}
+                />
+              </Box>
             </CardContent>
           </Card>
         </Grid>
@@ -801,12 +851,26 @@ const TimelineChart = (props: TimelineChartProps): JSX.Element => {
                 height: '100%',
               }}
             >
-              <Chart
-                type="pie"
-                series={totalCasesChart.series}
-                options={totalCasesChart.options}
-                height={setChartHeight(0.4)}
-              />
+              <Box className={classes.graphWrapper}>
+                <ChartInfoIcon
+                  title={
+                    <>
+                      This chart represent the percentage of{' '}
+                      <strong style={{ color: STATUS_COLOR.HOSPITALIZED }}>Hospitalized</strong>,{' '}
+                      <strong style={{ color: STATUS_COLOR.RECOVERED }}>Recovered</strong>, and{' '}
+                      <strong style={{ color: STATUS_COLOR.DEATHS }}>Deaths</strong> (combined to be
+                      total <strong style={{ color: STATUS_COLOR.CONFIRMED }}>Confirmed</strong>{' '}
+                      cases) as of today.
+                    </>
+                  }
+                />
+                <Chart
+                  type="pie"
+                  series={totalCasesChart.series}
+                  options={totalCasesChart.options}
+                  height={setChartHeight(0.4)}
+                />
+              </Box>
             </CardContent>
           </Card>
         </Grid>
@@ -822,12 +886,24 @@ const TimelineChart = (props: TimelineChartProps): JSX.Element => {
                 height: '100%',
               }}
             >
-              <Chart
-                type="bar"
-                series={confirmedRecoveredChart.series}
-                options={confirmedRecoveredChart.options}
-                height={setChartHeight(0.4)}
-              />
+              <Box className={classes.graphWrapper}>
+                <ChartInfoIcon
+                  title={
+                    <>
+                      This chart represent the proportion between{' '}
+                      <strong style={{ color: STATUS_COLOR.CONFIRMED }}>Confirmed</strong> and{' '}
+                      <strong style={{ color: STATUS_COLOR.RECOVERED }}>Recovered</strong> over the
+                      period of 14 days.
+                    </>
+                  }
+                />
+                <Chart
+                  type="bar"
+                  series={confirmedRecoveredChart.series}
+                  options={confirmedRecoveredChart.options}
+                  height={setChartHeight(0.4)}
+                />
+              </Box>
             </CardContent>
           </Card>
         </Grid>
