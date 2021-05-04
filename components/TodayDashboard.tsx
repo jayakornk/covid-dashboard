@@ -82,7 +82,7 @@ const TodayDashboard = ({ today, timeline }: TodayDashboardProps): JSX.Element =
           <Typography>
             Source:{' '}
             <Link
-              color="inherit"
+              color="secondary"
               href="https://covid19.th-stat.com/th/api"
               target="_blank"
               rel="noopener noreferrer"
