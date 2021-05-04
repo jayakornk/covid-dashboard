@@ -2,7 +2,7 @@ import { Link, Typography } from '@material-ui/core';
 
 const Footer = (): JSX.Element => {
   return (
-    <Typography variant="caption" color="GrayText">
+    <Typography variant="caption" color="text.primary">
       &copy; {new Date().getFullYear()}{' '}
       <Link href="https://jayakornk.dev" color="inherit">
         JayakornK

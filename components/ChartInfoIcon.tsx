@@ -66,7 +66,11 @@ const ChartInfoIcon = ({ title, maxWidth = 300 }: IChartInfoIconProps): JSX.Elem
         disableHoverListener
         disableTouchListener
       >
-        <IconButton className={classes.infoButton} onClick={handleTooltipOpen}>
+        <IconButton
+          className={classes.infoButton}
+          onClick={handleTooltipOpen}
+          aria-label="graph info toggle button"
+        >
           <InfoOutlined className={classes.infoIcon} />
         </IconButton>
       </Tooltip>
