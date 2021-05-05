@@ -37,3 +37,5 @@ yarn-error.log*
 .npmrc
 .vscode
 .idea
+public/sw.js
+public/workbox-*.js
