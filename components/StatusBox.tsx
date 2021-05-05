@@ -23,7 +23,6 @@ const StatusBox = ({
     <Card
       sx={{
         height: '100%',
-        bgcolor: '#fff',
       }}
     >
       <Box
