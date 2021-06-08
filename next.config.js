@@ -7,6 +7,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 module.exports = withBundleAnalyzer(
   withPWA({
+    target: 'severless',
     pwa: {
       dest: 'public',
       disable: process.env.NODE_ENV === 'development',
