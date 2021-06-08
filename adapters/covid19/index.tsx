@@ -4,7 +4,7 @@ import { CasesSum, Timeline, Today } from '@/models/covid19.interface';
 
 function returnAxiosInstance() {
   return Axios.create({
-    baseURL: 'https://covid19.th-stat.com/api/open',
+    baseURL: 'https://covid19.th-stat.com/json/covid19v2',
   });
 }
 
@@ -14,16 +14,16 @@ export function get<T>(url: string): Promise<AxiosResponse<T>> {
 }
 
 export async function getToday(): Promise<Today> {
-  const res = await get<Today>('/today');
+  const res = await get<Today>('/getTodayCases.json');
   return res.data;
 }
 
 export async function getTimeline(): Promise<Timeline> {
-  const res = await get<Timeline>('/timeline');
+  const res = await get<Timeline>('/getTimeline.json');
   return res.data;
 }
 
 export async function getCasesSum(): Promise<CasesSum> {
-  const res = await get<CasesSum>('/cases/sum');
+  const res = await get<CasesSum>('/getSumCases.json');
   return res.data;
 }
